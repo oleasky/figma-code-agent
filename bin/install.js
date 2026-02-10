@@ -12,21 +12,32 @@ const readline = require('readline');
 const PLUGIN_NAME = 'fca';
 
 const SKILL_NAMES = [
-  'interpret-layout',
-  'generate-react',
-  'generate-html',
-  'extract-tokens',
-  'map-payload-block',
+  // Tier 1: Developer workflow skills
+  'build-plugin',
+  'build-codegen-plugin',
+  'build-importer',
+  'build-token-pipeline',
+  // Tier 2: Reference/validation skills
+  'ref-layout',
+  'ref-react',
+  'ref-html',
+  'ref-tokens',
+  'ref-payload-block',
+  // Tier 3: Audit
   'audit-plugin',
 ];
 
 const SKILL_DESCRIPTIONS = {
-  'interpret-layout': 'Interpret Auto Layout -> CSS Flexbox',
-  'generate-react':   'Generate React/TSX from Figma node',
-  'generate-html':    'Generate HTML + layered CSS',
-  'extract-tokens':   'Extract design tokens -> CSS vars + Tailwind',
-  'map-payload-block': 'Map Figma component -> PayloadCMS block',
-  'audit-plugin':     'Audit plugin against best practices',
+  'build-plugin':         'Build a Figma plugin from scratch or enhance one',
+  'build-codegen-plugin': 'Build a Dev Mode codegen plugin',
+  'build-importer':       'Build a Figma-to-CMS/React importer service',
+  'build-token-pipeline': 'Build a Figma token sync pipeline',
+  'ref-layout':           'Reference: Interpret Auto Layout -> CSS Flexbox',
+  'ref-react':            'Reference: Generate React/TSX from Figma node',
+  'ref-html':             'Reference: Generate HTML + layered CSS',
+  'ref-tokens':           'Reference: Extract design tokens -> CSS vars + Tailwind',
+  'ref-payload-block':    'Reference: Map Figma component -> PayloadCMS block',
+  'audit-plugin':         'Audit plugin against best practices',
 };
 
 // --- Paths ---

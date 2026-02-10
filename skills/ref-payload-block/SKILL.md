@@ -1,6 +1,6 @@
 ---
-name: map-payload-block
-description: Map a Figma component to a PayloadCMS block definition with config, renderer, types, and CSS Module. Use this skill when the user has a Figma component (JSON data, component description, or REST API node) and needs a complete PayloadCMS block implementation following the container-first architecture.
+name: ref-payload-block
+description: "Reference: Map a Figma component to a PayloadCMS block definition with config, renderer, types, and CSS Module. Use this skill when the user has a Figma component (JSON data, component description, or REST API node) and needs a complete PayloadCMS block implementation following the container-first architecture."
 ---
 
 @knowledge/payload-blocks.md

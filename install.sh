@@ -14,11 +14,18 @@ PLUGIN_NAME="fca"
 
 # Skill names (directory names under skills/)
 SKILL_NAMES=(
-  "interpret-layout"
-  "generate-react"
-  "generate-html"
-  "extract-tokens"
-  "map-payload-block"
+  # Tier 1: Developer workflow skills
+  "build-plugin"
+  "build-codegen-plugin"
+  "build-importer"
+  "build-token-pipeline"
+  # Tier 2: Reference/validation skills
+  "ref-layout"
+  "ref-react"
+  "ref-html"
+  "ref-tokens"
+  "ref-payload-block"
+  # Tier 3: Audit
   "audit-plugin"
 )
 
@@ -42,11 +49,15 @@ Options:
   --help        Show this help message
 
 Skills installed:
-  interpret-layout      Interpret Auto Layout -> CSS Flexbox
-  generate-react        Generate React/TSX from Figma node
-  generate-html         Generate HTML + layered CSS
-  extract-tokens        Extract design tokens -> CSS vars + Tailwind
-  map-payload-block     Map Figma component -> PayloadCMS block
+  build-plugin          Build a Figma plugin from scratch or enhance one
+  build-codegen-plugin  Build a Dev Mode codegen plugin
+  build-importer        Build a Figma-to-CMS/React importer service
+  build-token-pipeline  Build a Figma token sync pipeline
+  ref-layout            Reference: Interpret Auto Layout -> CSS Flexbox
+  ref-react             Reference: Generate React/TSX from Figma node
+  ref-html              Reference: Generate HTML + layered CSS
+  ref-tokens            Reference: Extract design tokens -> CSS vars + Tailwind
+  ref-payload-block     Reference: Map Figma component -> PayloadCMS block
   audit-plugin          Audit plugin against best practices
 
 Install location: ~/.claude/skills/${PLUGIN_NAME}--{name}/SKILL.md
@@ -214,11 +225,15 @@ fi
 
 echo ""
 echo "Invoke skills in Claude Code:"
-echo "  /fca:interpret-layout      Interpret Auto Layout -> CSS Flexbox"
-echo "  /fca:generate-react        Generate React/TSX from Figma node"
-echo "  /fca:generate-html         Generate HTML + layered CSS"
-echo "  /fca:extract-tokens        Extract design tokens -> CSS vars + Tailwind"
-echo "  /fca:map-payload-block     Map Figma component -> PayloadCMS block"
+echo "  /fca:build-plugin          Build a Figma plugin from scratch or enhance one"
+echo "  /fca:build-codegen-plugin  Build a Dev Mode codegen plugin"
+echo "  /fca:build-importer        Build a Figma-to-CMS/React importer service"
+echo "  /fca:build-token-pipeline  Build a Figma token sync pipeline"
+echo "  /fca:ref-layout            Reference: Interpret Auto Layout -> CSS Flexbox"
+echo "  /fca:ref-react             Reference: Generate React/TSX from Figma node"
+echo "  /fca:ref-html              Reference: Generate HTML + layered CSS"
+echo "  /fca:ref-tokens            Reference: Extract design tokens -> CSS vars + Tailwind"
+echo "  /fca:ref-payload-block     Reference: Map Figma component -> PayloadCMS block"
 echo "  /fca:audit-plugin          Audit plugin against best practices"
 echo ""
 echo "Tip: Use /clear before invoking a skill for a fresh context window."

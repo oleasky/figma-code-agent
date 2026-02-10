@@ -1,16 +1,17 @@
 # Figma Agent
 
-A Claude Code plugin that provides expert-level Figma design-to-code knowledge through 19 knowledge modules and 6 invokable skills.
+A Claude Code plugin that provides expert-level Figma development knowledge through 19 knowledge modules and 10 invokable skills.
 
 ## What It Does
 
-Figma Agent turns Claude into a Figma expert. It encodes production-proven patterns for:
+Figma Agent is a **developer expert tool** that helps you build software integrating with Figma. It encodes production-proven patterns for:
 
-- **Figma API usage** — REST API, Plugin API, Variables API, Webhooks, Dev Mode
-- **Design-to-code generation** — Auto Layout to Flexbox, visual properties, typography, assets, semantic HTML
-- **Design tokens** — Extraction, naming, CSS Custom Properties, Tailwind config, mode-aware rendering
-- **PayloadCMS integration** — Block mapping, field factories, container nesting, visual builder
-- **Plugin development** — Architecture, error handling, performance, caching, async patterns, testing
+- **Plugin development** — Architecture, IPC, data flow, error handling, performance, caching, async patterns, testing
+- **Codegen plugins** — Dev Mode integration, 3-second timeout strategy, preference system, language routing
+- **Import pipelines** — REST API fetching, node traversal, platform-specific transformation, asset handling
+- **Token synchronization** — Variables API, alias resolution, mode classification, multi-format rendering
+- **Design-to-code** — Auto Layout to Flexbox, visual properties, typography, assets, semantic HTML
+- **CMS integration** — PayloadCMS block mapping, field factories, container nesting, visual builder
 
 ## Installation
 
@@ -45,22 +46,38 @@ claude --plugin-dir /path/to/figma-code-agent
 
 After installation, invoke skills directly in Claude Code:
 
+### Tier 1: Developer Workflow
+
 | Skill | What It Does |
 |-------|-------------|
-| `/fca:interpret-layout` | Convert Figma Auto Layout to CSS Flexbox |
-| `/fca:generate-react` | Generate a React/TSX component from Figma node data |
-| `/fca:generate-html` | Generate semantic HTML + CSS from Figma node data |
-| `/fca:extract-tokens` | Extract design tokens into CSS variables + Tailwind config |
-| `/fca:map-payload-block` | Map a Figma component to a PayloadCMS block |
+| `/fca:build-plugin` | Build a Figma plugin from scratch or enhance an existing one |
+| `/fca:build-codegen-plugin` | Build a Dev Mode codegen plugin that generates code from designs |
+| `/fca:build-importer` | Build a service that fetches Figma designs into a CMS or React app |
+| `/fca:build-token-pipeline` | Build a pipeline that syncs Figma design tokens to code |
+
+### Tier 2: Reference / Validation
+
+| Skill | What It Does |
+|-------|-------------|
+| `/fca:ref-layout` | Interpret Figma Auto Layout and generate CSS Flexbox |
+| `/fca:ref-react` | Generate a React/TSX component from Figma node data |
+| `/fca:ref-html` | Generate semantic HTML + CSS from Figma node data |
+| `/fca:ref-tokens` | Extract design tokens into CSS variables + Tailwind config |
+| `/fca:ref-payload-block` | Map a Figma component to a PayloadCMS block |
+
+### Tier 3: Audit
+
+| Skill | What It Does |
+|-------|-------------|
 | `/fca:audit-plugin` | Audit a Figma plugin against production best practices |
 
 ### Example
 
 ```
-/fca:generate-react <paste Figma node JSON or describe the component>
+/fca:build-plugin I want to build a plugin that exports frames as React components
 ```
 
-Each skill loads the relevant knowledge modules automatically and follows a structured multi-step process to produce accurate output.
+Tier 1 skills follow a 4-phase process: **Assess** the project → **Recommend** architecture → **Implement** code → **Validate** against best practices. Tier 2 skills follow a structured step-by-step process for direct code generation from Figma data.
 
 ## Knowledge Modules
 
@@ -85,18 +102,22 @@ Reference any module directly in your project:
 ```
 figma-code-agent/
   bin/
-    install.js           # npx installer (copies files to ~/.claude/)
+    install.js               # npx installer (copies files to ~/.claude/)
   .claude-plugin/
-    plugin.json          # Claude Code plugin manifest
+    plugin.json              # Claude Code plugin manifest
   skills/
-    interpret-layout/    # Auto Layout -> Flexbox
-    generate-react/      # Figma -> React/TSX component
-    generate-html/       # Figma -> HTML + CSS
-    extract-tokens/      # Figma -> CSS variables + Tailwind
-    map-payload-block/   # Figma -> PayloadCMS block
-    audit-plugin/        # Plugin quality audit
-  knowledge/             # 19 standalone knowledge modules
-  package.json           # npm package for npx installation
+    build-plugin/            # Build a Figma plugin
+    build-codegen-plugin/    # Build a codegen plugin
+    build-importer/          # Build a Figma importer
+    build-token-pipeline/    # Build a token sync pipeline
+    ref-layout/              # Reference: Auto Layout -> Flexbox
+    ref-react/               # Reference: Figma -> React/TSX
+    ref-html/                # Reference: Figma -> HTML + CSS
+    ref-tokens/              # Reference: Figma -> CSS variables + Tailwind
+    ref-payload-block/       # Reference: Figma -> PayloadCMS block
+    audit-plugin/            # Plugin quality audit
+  knowledge/                 # 19 standalone knowledge modules
+  package.json               # npm package for npx installation
 ```
 
 ## CSS Strategy

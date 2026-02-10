@@ -1,6 +1,6 @@
 ---
-name: extract-tokens
-description: Extract design tokens from Figma Variables, styles, or node data and generate CSS Custom Properties + Tailwind config. Use this skill when the user has Figma file data (Variables API response, style definitions, or node tree) and needs a structured token output with semantic naming, mode-aware rendering, and CSS/Tailwind integration.
+name: ref-tokens
+description: "Reference: Extract design tokens from Figma Variables, styles, or node data and generate CSS Custom Properties + Tailwind config. Use this skill when the user has Figma file data (Variables API response, style definitions, or node tree) and needs a structured token output with semantic naming, mode-aware rendering, and CSS/Tailwind integration."
 ---
 
 @knowledge/design-tokens.md

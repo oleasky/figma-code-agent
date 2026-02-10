@@ -1,6 +1,6 @@
 ---
-name: generate-html
-description: Generate semantic HTML5 and layered CSS from Figma node data. Use this skill when the user has Figma design data and needs vanilla HTML + CSS output (no React, no JSX, no TypeScript). Ideal for static sites, email templates, prototypes, or framework-agnostic code.
+name: ref-html
+description: "Reference: Generate semantic HTML5 and layered CSS from Figma node data. Use this skill when the user has Figma design data and needs vanilla HTML + CSS output (no React, no JSX, no TypeScript). Ideal for static sites, email templates, prototypes, or framework-agnostic code."
 ---
 
 @knowledge/design-to-code-layout.md

@@ -1,16 +1,19 @@
-# Figma Agent — Knowledge Base & Skills
+# Figma Agent — Developer Expert Tool
 
-The definitive expert on Figma APIs, design-to-code interpretation, React/HTML/CSS code generation, and PayloadCMS integration — delivered as modular knowledge files and invokable Claude Code skills.
+The definitive developer tool for building software that integrates with Figma — plugins, codegen plugins, importers, token pipelines, and design-to-code workflows. Delivered as 19 knowledge modules and 10 invokable Claude Code skills.
 
 ## What This Agent Does
 
-This repository is THE authoritative source of Figma design-to-code knowledge for Claude Code. It encodes:
+This agent is a **developer expert tool** that helps you build software integrating with Figma. It encodes:
 
-- **Production patterns** from a real-world Figma plugin (extract → interpret → export)
+- **Plugin development patterns** from a production Figma plugin (architecture, IPC, data flow, best practices)
+- **Import/export pipelines** for fetching Figma designs and rendering them in CMS or React apps
+- **Token synchronization** patterns for syncing Figma Variables to CSS, Tailwind, and SCSS
+- **Design-to-code knowledge** for accurate Auto Layout, visual properties, typography, and asset handling
 - **CMS integration patterns** from a PayloadCMS + Next.js project with visual builder
 - **Verified API knowledge** from Figma developer documentation (2025/2026)
 
-Use this agent as an expert reference for Figma plugin development, design-to-code generation, and CMS integration in any project.
+Use this agent when building Figma plugins, codegen plugins, design importers, token pipelines, or any software that reads from or writes to Figma.
 
 ## Knowledge Modules
 
@@ -38,13 +41,29 @@ Use this agent as an expert reference for Figma plugin development, design-to-co
 
 ## Skills
 
+### Tier 1: Developer Workflow (Assess → Recommend → Implement → Validate)
+
 | Command | Description | Knowledge Modules |
 |---------|-------------|-------------------|
-| `/fca:interpret-layout` | Interpret Auto Layout → CSS Flexbox | layout |
-| `/fca:generate-react` | Generate React/TSX from Figma node | layout, visual, typography, assets, semantic, css-strategy |
-| `/fca:generate-html` | Generate HTML + layered CSS | layout, visual, typography, assets, semantic, css-strategy, design-tokens |
-| `/fca:extract-tokens` | Extract design tokens → CSS vars + Tailwind | design-tokens, design-tokens-variables, figma-api-variables, css-strategy |
-| `/fca:map-payload-block` | Map Figma component → PayloadCMS block | payload-blocks, payload-figma-mapping, payload-visual-builder, css-strategy |
+| `/fca:build-plugin` | Build a Figma plugin from scratch or enhance one | plugin-architecture, plugin-best-practices, figma-api-plugin |
+| `/fca:build-codegen-plugin` | Build a Dev Mode codegen plugin | plugin-codegen, figma-api-devmode, plugin-best-practices, figma-api-plugin |
+| `/fca:build-importer` | Build a Figma-to-CMS/React importer service | figma-api-rest, figma-api-variables, all design-to-code, css-strategy, design-tokens, payload-figma-mapping, payload-blocks |
+| `/fca:build-token-pipeline` | Build a Figma token sync pipeline | figma-api-variables, design-tokens, design-tokens-variables, figma-api-webhooks, css-strategy |
+
+### Tier 2: Reference / Validation
+
+| Command | Description | Knowledge Modules |
+|---------|-------------|-------------------|
+| `/fca:ref-layout` | Reference: Interpret Auto Layout → CSS Flexbox | layout |
+| `/fca:ref-react` | Reference: Generate React/TSX from Figma node | layout, visual, typography, assets, semantic, css-strategy |
+| `/fca:ref-html` | Reference: Generate HTML + layered CSS | layout, visual, typography, assets, semantic, css-strategy, design-tokens |
+| `/fca:ref-tokens` | Reference: Extract design tokens → CSS vars + Tailwind | design-tokens, design-tokens-variables, figma-api-variables, css-strategy |
+| `/fca:ref-payload-block` | Reference: Map Figma component → PayloadCMS block | payload-blocks, payload-figma-mapping, payload-visual-builder, css-strategy |
+
+### Tier 3: Audit
+
+| Command | Description | Knowledge Modules |
+|---------|-------------|-------------------|
 | `/fca:audit-plugin` | Audit plugin against best practices | plugin-architecture, plugin-codegen, plugin-best-practices, figma-api-plugin |
 
 ## Installation
@@ -92,11 +111,20 @@ claude --plugin-dir /path/to/figma-code-agent
 After installation, invoke skills in Claude Code:
 
 ```
-/fca:interpret-layout <paste Figma Auto Layout JSON>
-/fca:generate-react <paste Figma node data or describe component>
-/fca:generate-html <paste Figma node data>
-/fca:extract-tokens <paste Figma Variables API response>
-/fca:map-payload-block <paste Figma component data>
+# Tier 1: Developer workflow skills
+/fca:build-plugin I want to build a plugin that exports frames as React components
+/fca:build-codegen-plugin Generate Tailwind + React code in Dev Mode inspect panel
+/fca:build-importer Import Figma page designs into PayloadCMS blocks
+/fca:build-token-pipeline Sync Figma Variables to CSS and Tailwind on library publish
+
+# Tier 2: Reference/validation skills
+/fca:ref-layout <paste Figma Auto Layout JSON>
+/fca:ref-react <paste Figma node data or describe component>
+/fca:ref-html <paste Figma node data>
+/fca:ref-tokens <paste Figma Variables API response>
+/fca:ref-payload-block <paste Figma component data>
+
+# Tier 3: Audit
 /fca:audit-plugin <path to plugin codebase>
 ```
 

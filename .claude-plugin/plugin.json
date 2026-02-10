@@ -1,7 +1,7 @@
 {
   "name": "fca",
   "version": "1.0.0",
-  "description": "Figma design-to-code expertise — production patterns for layout interpretation, React/HTML generation, token extraction, PayloadCMS mapping, and plugin auditing.",
+  "description": "Figma developer expert tool — 10 skills for building plugins, codegen plugins, importers, token pipelines, and design-to-code workflows. Backed by 19 knowledge modules covering Figma APIs, design-to-code patterns, and CMS integration.",
   "author": {
     "name": "aolea"
   },

@@ -1,6 +1,6 @@
 ---
-name: generate-react
-description: Generate a production-grade React/TSX component from Figma node data. Use this skill when the user has Figma design data (JSON node tree, REST API response, or component description) and needs a typed React component with CSS Modules, proper semantics, and accessibility.
+name: ref-react
+description: "Reference: Generate a production-grade React/TSX component from Figma node data. Use this skill when the user has Figma design data (JSON node tree, REST API response, or component description) and needs a typed React component with CSS Modules, proper semantics, and accessibility."
 ---
 
 @knowledge/design-to-code-layout.md

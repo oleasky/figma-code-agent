@@ -1,6 +1,6 @@
 ---
-name: interpret-layout
-description: Interpret Figma Auto Layout properties and generate correct CSS Flexbox. Use this skill when the user has Figma Auto Layout JSON data (layoutMode, sizing modes, alignment, spacing, wrap, constraints) and needs the corresponding CSS Flexbox output with accurate sizing mode handling.
+name: ref-layout
+description: "Reference: Interpret Figma Auto Layout properties and generate correct CSS Flexbox. Use this skill when the user has Figma Auto Layout JSON data (layoutMode, sizing modes, alignment, spacing, wrap, constraints) and needs the corresponding CSS Flexbox output with accurate sizing mode handling."
 ---
 
 @knowledge/design-to-code-layout.md
