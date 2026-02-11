@@ -40,9 +40,40 @@ const SKILL_DESCRIPTIONS = {
   'audit-plugin':         'Audit plugin against best practices',
 };
 
-// --- Paths ---
+// --- Version ---
 
 const PKG_ROOT = path.resolve(__dirname, '..');
+const PKG_VERSION = require(path.join(PKG_ROOT, 'package.json')).version;
+
+function getVersionFile(base) {
+  return path.join(base, PLUGIN_NAME, '.version');
+}
+
+function getInstalledVersion(base) {
+  const versionFile = getVersionFile(base);
+  try {
+    return fs.readFileSync(versionFile, 'utf-8').trim();
+  } catch {
+    return null;
+  }
+}
+
+function writeVersion(base, version) {
+  const versionFile = getVersionFile(base);
+  ensureDir(path.dirname(versionFile));
+  fs.writeFileSync(versionFile, version, 'utf-8');
+}
+
+function removeVersion(base) {
+  const versionFile = getVersionFile(base);
+  try {
+    fs.unlinkSync(versionFile);
+  } catch {
+    // Ignore — file may not exist
+  }
+}
+
+// --- Paths ---
 
 function getGlobalBase() {
   return path.join(os.homedir(), '.claude');
@@ -100,6 +131,23 @@ function install(base) {
     ['@knowledge/', `@${knowledgeRefPath}/`],
   ];
 
+  // Version check
+  const installedVersion = getInstalledVersion(base);
+  if (installedVersion) {
+    if (installedVersion === PKG_VERSION) {
+      console.log(`Figma Agent v${PKG_VERSION} is already up to date.`);
+      console.log('');
+      console.log('Reinstalling to ensure all files are current...');
+      console.log('');
+    } else {
+      console.log(`Updating Figma Agent: v${installedVersion} -> v${PKG_VERSION}`);
+      console.log('');
+    }
+  } else {
+    console.log(`Installing Figma Agent v${PKG_VERSION}`);
+    console.log('');
+  }
+
   // Validate source files
   console.log('Validating source files...');
   let missing = 0;
@@ -153,9 +201,12 @@ function install(base) {
   }
   console.log('');
 
+  // Write version file
+  writeVersion(base, PKG_VERSION);
+
   // Summary
   const location = base === getGlobalBase() ? 'global (~/.claude/)' : `local (${path.relative(process.cwd(), base) || '.claude/'})`;
-  console.log(`Installed ${skillCount} skills + ${knowledgeCount} knowledge modules (${location})`);
+  console.log(`Installed ${skillCount} skills + ${knowledgeCount} knowledge modules — v${PKG_VERSION} (${location})`);
   console.log('');
   console.log('Invoke skills in Claude Code:');
   for (const name of SKILL_NAMES) {
@@ -185,6 +236,9 @@ function uninstall(base) {
     }
     fs.rmSync(targets.commands, { recursive: true, force: true });
   }
+
+  // Remove version file
+  removeVersion(base);
 
   // Remove knowledge files
   if (fs.existsSync(targets.knowledge)) {
@@ -254,6 +308,7 @@ async function main() {
   let mode = null;
   let isUninstall = false;
   let showHelp = false;
+  let showVersion = false;
 
   for (const arg of args) {
     switch (arg) {
@@ -269,6 +324,10 @@ async function main() {
       case '-u':
         isUninstall = true;
         break;
+      case '--version':
+      case '-v':
+        showVersion = true;
+        break;
       case '--help':
       case '-h':
         showHelp = true;
@@ -280,9 +339,26 @@ async function main() {
     }
   }
 
+  if (showVersion) {
+    const globalInstalled = getInstalledVersion(getGlobalBase());
+    const localInstalled = getInstalledVersion(getLocalBase());
+    console.log(`figma-code-agent v${PKG_VERSION} (package)`);
+    if (globalInstalled) {
+      console.log(`  Global install: v${globalInstalled}${globalInstalled === PKG_VERSION ? ' (up to date)' : ' (update available)'}`);
+    } else {
+      console.log('  Global install: not installed');
+    }
+    if (localInstalled) {
+      console.log(`  Local install:  v${localInstalled}${localInstalled === PKG_VERSION ? ' (up to date)' : ' (update available)'}`);
+    } else {
+      console.log('  Local install:  not installed');
+    }
+    process.exit(0);
+  }
+
   if (showHelp) {
     console.log(`
-Figma Agent — npx installer
+Figma Agent — npx installer (v${PKG_VERSION})
 
 Usage: npx figma-code-agent [OPTIONS]
 
@@ -290,6 +366,7 @@ Options:
   --global, -g     Install to ~/.claude/ (available in all projects)
   --local, -l      Install to .claude/ in current project
   --uninstall, -u  Remove installed files
+  --version, -v    Show installed and available versions
   --help, -h       Show this help message
 
 Examples:
@@ -298,6 +375,7 @@ Examples:
   npx figma-code-agent --local      Install to current project's .claude/
   npx figma-code-agent --uninstall  Remove from ~/.claude/ (default)
   npx figma-code-agent --uninstall --local  Remove from .claude/
+  npx figma-code-agent --version    Check installed version
 `);
     process.exit(0);
   }
