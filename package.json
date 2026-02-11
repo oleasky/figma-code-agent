@@ -5,10 +5,19 @@
   "bin": {
     "figma-code-agent": "bin/install.js"
   },
+  "scripts": {
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "changeset publish",
+    "prepublishOnly": "npm run build --if-present"
+  },
   "files": [
     "bin",
     "skills",
-    "knowledge"
+    "knowledge",
+    "README.md",
+    "LICENSE",
+    "package.json"
   ],
   "keywords": [
     "figma",
@@ -27,5 +36,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/oleasky/figma-code-agent"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.8"
   }
 }
