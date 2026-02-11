@@ -35,7 +35,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/oleasky/figma-code-agent"
+    "url": "git+https://github.com/oleasky/figma-code-agent.git"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.8"
